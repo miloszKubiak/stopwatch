@@ -34,7 +34,7 @@ const handleStart = () => {
 
 const handlePause = () => {
     clearInterval(countTime);
-}
+};
 
 const handleStop = () => {
     time.innerHTML = `Last time: ${stopwatch.textContent}`
@@ -45,13 +45,13 @@ const handleStop = () => {
     }
 
     clearStuff();
-}
+};
 
 const handleReset = () => {
     time.style.visibility = 'hidden';
     timesArr = [];
     clearStuff();
-}
+};
 
 const clearStuff = () => {
     clearInterval(countTime);
@@ -59,10 +59,9 @@ const clearStuff = () => {
     timeList.textContent = '';
     seconds = 0;
     minutes = 0;
-}
+};
 
 const showHistory = () => {
-
     timeList.textContent = '';
     let num = 1;
 
@@ -73,10 +72,23 @@ const showHistory = () => {
         timeList.appendChild(newTime);
         num++;
     })
-}
+};
+
+const showModal = () => {
+    if (!(modalShadow.style.display === 'block')) {
+        modalShadow.style.display = 'block';
+    } else {
+        modalShadow.style.display = 'none';
+    };
+
+    modalShadow.classList.toggle('modal-animation');
+};
 
 startBtn.addEventListener('click', handleStart);
 pauseBtn.addEventListener('click', handlePause);
 stopBtn.addEventListener('click', handleStop);
 resetBtn.addEventListener('click', handleReset);
 historyBtn.addEventListener('click', showHistory);
+infoBtn.addEventListener('click', showModal);
+closeModalBtn.addEventListener('click', showModal);
+window.addEventListener('click', e => e.target === modalShadow ? showModal() : false);
